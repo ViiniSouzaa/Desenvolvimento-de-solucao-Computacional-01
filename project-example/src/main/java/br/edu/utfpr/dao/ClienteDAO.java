@@ -96,7 +96,7 @@ public class ClienteDAO {
     public List<ClienteDTO> getAll(){
         try (Connection conn = DriverManager.getConnection("jdbc:derby:memory:database;create=true")){
             List<ClienteDTO> list =  new ArrayList<>();
-            String sql = "SELECT * FROM cliente join pais on(pais.id = id_pais)";
+            String sql = "SELECT * FROM cliente join pais on pais.id = id_pais";
             
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(sql);
@@ -123,7 +123,7 @@ public class ClienteDAO {
     public ClienteDTO getById(int id){
         try (Connection conn = DriverManager.getConnection("jdbc:derby:memory:database;create=true")){
             ClienteDTO cliente = ClienteDTO.builder().build();
-            String sql = "SELECT * FROM cliente join pais on(pais.id = id_pais) WHERE id=?";
+            String sql = "SELECT * FROM cliente join pais on pais.id = id_pais WHERE id=?";
             
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
